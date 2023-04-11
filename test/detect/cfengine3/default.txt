@@ -17,6 +17,37 @@ body file control
 
 bundle agent example( param1, param2, param3 )
 {
+@if minimum_version(3.10)
+  reports: "Running CFEngine 3.10 or higher";
+@endif
+
+@if maximum_version(3.12.1)
+  reports: "Running CFEngine 3.12.1 or lower";
+@endif
+
+@if at_version(3.10.1)
+  reports: "Running CFEngine 3.10.1";
+@endif
+
+@if between_versions( 3.10.1, 3.12.0 )
+  reports: "Between CFEngine 3.10.1 and 3.12.0";
+@endif
+
+@if after_version( 3.15.1 )
+  reports: "After CFEngine 3.15.1";
+@endif
+
+@if minimum_version(3.16)
+  # Implementation for 3.16+
+  vars:
+    "container"
+      data => classfiltercsv(...);
+@else
+  # Implementation for versions before 3.16
+  vars:
+    "container"
+      data => readcsv(...);
+@endif
 }
 
 bundle server shared
