@@ -1,0 +1,40 @@
+<span class="hljs-keyword">body</span> <span class="hljs-title">common</span> <span class="hljs-title">control</span>
+{
+  inputs =&gt; { <span class="hljs-string">&quot;$(sys.libdir)/stdlib.cf&quot;</span> };
+  bundlesequence =&gt; { <span class="hljs-string">&quot;cfengine:main&quot;</span> };
+}
+
+<span class="hljs-keyword">bundle</span> <span class="hljs-title">agent</span> <span class="hljs-title">example</span>
+{
+  reports:
+    <span class="hljs-string">&quot;Some example promise&quot;</span>;
+}
+
+<span class="hljs-keyword">body</span> <span class="hljs-title">file</span> <span class="hljs-title">control</span>
+{
+  namespace =&gt; <span class="hljs-string">&quot;cfengine&quot;</span>
+}
+
+<span class="hljs-keyword">bundle</span> <span class="hljs-title">agent</span> <span class="hljs-title">example</span>( <span class="hljs-title">param1</span>, <span class="hljs-title">param2</span>, <span class="hljs-title">param3</span> )
+{
+}
+
+<span class="hljs-keyword">bundle</span> <span class="hljs-title">server</span> <span class="hljs-title">shared</span>
+<span class="hljs-comment"># @brief share files</span>
+{
+  access:
+    <span class="hljs-string">&quot;/srv/public&quot;</span>
+      admit =&gt; { <span class="hljs-string">&quot;0.0.0.0/0&quot;</span> };
+}
+
+<span class="hljs-keyword">bundle</span> <span class="hljs-title">agent</span> <span class="hljs-title">main</span>
+<span class="hljs-comment"># @brief Main driver</span>
+{
+  vars:
+    <span class="hljs-string">&quot;mystring&quot;</span> string =&gt; <span class="hljs-string">&quot;mystringvalue&quot;</span>;
+    <span class="hljs-string">&quot;d&quot;</span> data =&gt; <span class="hljs-string">&#x27;{ &quot;my&quot;: &quot;json&quot; }&#x27;</span>;
+    <span class="hljs-string">&quot;l&quot;</span> slist =&gt; { <span class="hljs-string">&quot;my&quot;</span>, <span class="hljs-string">&quot;string&quot;</span>, <span class="hljs-string">&quot;list&quot;</span> };
+
+  methods:
+    <span class="hljs-string">&quot;Example&quot;</span> usebundle =&gt; cfengine:example( <span class="hljs-string">&quot;one&quot;</span>, <span class="hljs-string">&quot;$(mystring)&quot;</span>, $(mystring) );
+}

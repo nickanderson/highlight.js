@@ -43,6 +43,7 @@ The table below shows the full list of languages (and corresponding classes/alia
 | C3                      | c3                     | [highlightjs-c3](https://github.com/highlightjs/highlightjs-c3) |
 | Cache Object Script     | cos, cls               |         |
 | Candid                  | candid, did            | [highlightjs-motoko](https://github.com/rvanasa/highlightjs-motoko) |
+| CFEngine3	              | cf3, cfengine3, cfengine |       |	|
 | CMake                   | cmake, cmake.in        |         |
 | COBOL                   | cobol, standard-cobol   | [highlightjs-cobol](https://github.com/otterkit/highlightjs-cobol) |
 | Coq                     | coq                    |         |

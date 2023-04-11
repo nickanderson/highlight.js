@@ -1,0 +1,40 @@
+body common control
+{
+  inputs => { "$(sys.libdir)/stdlib.cf" };
+  bundlesequence => { "cfengine:main" };
+}
+
+bundle agent example
+{
+  reports:
+    "Some example promise";
+}
+
+body file control
+{
+  namespace => "cfengine"
+}
+
+bundle agent example( param1, param2, param3 )
+{
+}
+
+bundle server shared
+# @brief share files
+{
+  access:
+    "/srv/public"
+      admit => { "0.0.0.0/0" };
+}
+
+bundle agent main
+# @brief Main driver
+{
+  vars:
+    "mystring" string => "mystringvalue";
+    "d" data => '{ "my": "json" }';
+    "l" slist => { "my", "string", "list" };
+
+  methods:
+    "Example" usebundle => cfengine:example( "one", "$(mystring)", $(mystring) );
+}
